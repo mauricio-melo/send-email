@@ -7,10 +7,7 @@ import io.sysmap.m2m.sendmail.domain.Response;
 import io.sysmap.m2m.sendmail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -25,16 +22,16 @@ public class EmailResource {
     @Autowired
     private EmailService service;
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:9401")
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creating a new resource", responseReference = "New resource created.")
-    public ResponseEntity<Void> create(@Valid @RequestBody final Email email) {
+    public ResponseEntity<?> enviarEmail(@Valid @RequestBody final Email email) {
 
         try {
             service.serviceSendMail(email);
         } catch (MessagingException ex) {
 
         }
-
 
         return ResponseEntity.ok().build();
     }
