@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Email {
-    private String toEmail;
+    private String email;
+    private int token;
 }

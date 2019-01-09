@@ -29,8 +29,8 @@ public class EmailResource {
 
         try {
             service.serviceSendMail(email);
-        } catch (MessagingException ex) {
-
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
 
         return ResponseEntity.ok().build();

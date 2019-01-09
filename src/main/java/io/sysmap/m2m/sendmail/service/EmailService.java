@@ -20,8 +20,18 @@ public class EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setTo(email.getToEmail());
-        helper.setText("Segue o token 123456");
+
+
+        helper.setTo(email.getEmail());
+//        helper.setText("Segue o token " + email.getToken() + ".");
+
+        String html = "<h1>Ola, " + email.getEmail() + "!</h1>\n" +
+                      "<hr>\n" +
+                      "<h3>Seja bem-vindo ao M2M!</h3>\n" +
+                      "<p>Segue seu token: " + email.getToken() + "</p>\n" +
+                      "<p>Utilize-o para logar na plataforma. </p>";
+
+        helper.setText(html,true);
         helper.setSubject("TOKEN M2M");
 
         javaMailSender.send(message);
