@@ -15,12 +15,10 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void serviceSendMail(Email email) throws MessagingException {
+    public void sendMail(Email email) throws MessagingException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-
-
 
         helper.setTo(email.getEmail());
 //        helper.setText("Segue o token " + email.getToken() + ".");
@@ -28,11 +26,11 @@ public class EmailService {
         String html = "<h1>Ola, " + email.getEmail() + "!</h1>\n" +
                       "<hr>\n" +
                       "<h3>Seja bem-vindo ao M2M!</h3>\n" +
-                      "<p>Segue seu token: " + email.getToken() + "</p>\n" +
+                      "<p>Segue seu token: <b>" + email.getToken() + "</b></p>\n" +
                       "<p>Utilize-o para logar na plataforma. </p>";
 
         helper.setText(html,true);
-        helper.setSubject("TOKEN M2M");
+        helper.setSubject("Bem vindo - M2M");
 
         javaMailSender.send(message);
     }

@@ -3,7 +3,6 @@ package io.sysmap.m2m.sendmail.resource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.sysmap.m2m.sendmail.domain.Email;
-import io.sysmap.m2m.sendmail.domain.Response;
 import io.sysmap.m2m.sendmail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +24,10 @@ public class EmailResource {
     @CrossOrigin(origins = "http://localhost:9401")
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creating a new resource", responseReference = "New resource created.")
-    public ResponseEntity<?> enviarEmail(@Valid @RequestBody final Email email) {
+    public ResponseEntity<?> sendMail(@Valid @RequestBody final Email email) {
 
         try {
-            service.serviceSendMail(email);
+            service.sendMail(email);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
